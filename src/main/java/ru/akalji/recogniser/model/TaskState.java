@@ -1,10 +1,12 @@
 package ru.akalji.recogniser.model;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Entity
 @Table(name = "task_states")
+@Transactional
 public class TaskState {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

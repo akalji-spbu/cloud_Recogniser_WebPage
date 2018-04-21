@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
@@ -20,6 +21,7 @@ import org.springframework.data.annotation.Transient;
 
 @Entity
 @Table(name = "users")
+@Transactional
 public class User {
 
     @Id
