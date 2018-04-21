@@ -2,6 +2,7 @@ package ru.akalji.recogniser;
 
 
 import org.apache.log4j.Logger;
+import org.hibernate.Session;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
@@ -15,6 +16,10 @@ import ru.akalji.recogniser.model.TaskState;
 import ru.akalji.recogniser.repository.TaskRepository;
 import ru.akalji.recogniser.repository.TaskStateRepository;
 
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+import javax.transaction.Transactional;
+
 @Component
 public class RabbitMqListener {
 
@@ -26,6 +31,7 @@ public class RabbitMqListener {
 
 
     @RabbitListener(queues = "solved")
+    @Transactional
     public void worker1(String message) {
         ContentTypeDelegatingMessageConverter messageConverter = new ContentTypeDelegatingMessageConverter();
         JSONObject obj=(JSONObject) JSONValue.parse(message);
